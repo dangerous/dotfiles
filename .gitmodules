@@ -37,3 +37,6 @@
 [submodule "vim/bundle/dbext.vim"]
 	path = vim/bundle/dbext.vim
 	url = git://github.com/vim-scripts/dbext.vim.git
+[submodule "tomorrow-theme"]
+	path = tomorrow-theme
+	url = git@github.com:chriskempson/tomorrow-theme.git

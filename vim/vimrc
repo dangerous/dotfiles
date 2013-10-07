@@ -141,7 +141,7 @@ let g:NERDTreeQuitOnOpen = 1
 syntax enable
 set t_Co=16
 set background=dark
-colorscheme solarized
+colorscheme Tomorrow-Night
 
 " Supertab completion should use omni-completion
 let g:supertabdefaultcompletiontype = "context"
