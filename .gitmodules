@@ -19,9 +19,6 @@
 [submodule "tmux/tmux-colors-solarized"]
 	path = tmux/tmux-colors-solarized
 	url = git@github.com:seebi/tmux-colors-solarized.git
-[submodule "vim/bundle/tagbar"]
-	path = vim/bundle/tagbar
-	url = git@github.com:majutsushi/tagbar
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = git@github.com:scrooloose/syntastic.git
