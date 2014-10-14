@@ -40,3 +40,9 @@
 [submodule "tomorrow-theme"]
 	path = tomorrow-theme
 	url = git@github.com:chriskempson/tomorrow-theme.git
+[submodule "vim/bundle/vim-rails"]
+	path = vim/bundle/vim-rails
+	url = git@github.com:tpope/vim-rails.git
+[submodule "vim/bundle/vim-slim"]
+	path = vim/bundle/vim-slim
+	url = git@github.com:slim-template/vim-slim.git
