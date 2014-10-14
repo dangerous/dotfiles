@@ -99,6 +99,7 @@ let mapleader = ","
 nmap     <silent> <leader>d   :NERDTreeToggle<CR>
 nmap     <silent> <leader>l   :set list!<CR>
 nmap     <silent> <leader>n   :set nu!<CR>
+nmap     <silent> <leader>p   :set paste!<CR>
 nmap              <leader>v   :e $MYVIMRC<CR> " easy .vimrc editing
 nmap     <silent> <leader>w   :set wrap!<CR>
 nnoremap <silent> <leader>,   :call NERDComment(0, "toggle")<CR>
