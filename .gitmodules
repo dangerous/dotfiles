@@ -46,3 +46,6 @@
 [submodule "vim/bundle/vim-cucumber"]
 	path = vim/bundle/vim-cucumber
 	url = git@github.com:tpope/vim-cucumber.git
+[submodule "vim/bundle/vim-ruby"]
+	path = vim/bundle/vim-ruby
+	url = git@github.com:vim-ruby/vim-ruby.git
