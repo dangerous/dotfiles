@@ -34,6 +34,11 @@ set backspace=indent,eol,start " backspace over everything
 set splitbelow
 set splitright
 
+" move virtually up and down wrapped lines, but use physical lines when used
+" with a count
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
 " SEARCH
 set hlsearch
 set ignorecase
