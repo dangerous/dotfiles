@@ -55,4 +55,5 @@ alias x='exit'
 source /usr/local/share/zsh/site-functions/_aws
 
 staging() { heroku "$@" --remote staging }
-production() { heroku "$@" --remote production }
+# don't want to run this by mistake, ever!
+#production() { heroku "$@" --remote production }
