@@ -112,6 +112,7 @@ nmap     <silent> <leader>w   :set wrap!<CR>
 nnoremap <silent> <leader>,   :call NERDComment(0, "toggle")<CR>
 vnoremap <silent> <leader>,    <ESC>:call NERDComment(1, "toggle")<CR>
 nmap     <silent> <leader>.   :nohlsearch<CR>
+vmap              <leader>j !python -m json.tool
 
 nmap <F8> :TagbarOpenAutoClose<CR>
 
