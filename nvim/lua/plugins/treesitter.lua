@@ -5,6 +5,9 @@ return { -- Highlight, edit, and navigate code
   build = ':TSUpdate',
   -- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
   config = function()
+    local ts_path = vim.fn.stdpath 'data' .. '/lazy/nvim-treesitter'
+    vim.opt.rtp:prepend(ts_path .. '/runtime')
+
     local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
     require('nvim-treesitter').install(parsers)
 
