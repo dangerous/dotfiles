@@ -2,6 +2,21 @@ return {
   {
     'mfussenegger/nvim-lint',
     event = { 'BufReadPre', 'BufNewFile' },
+    keys = {
+      {
+        '<leader>tl',
+        function()
+          local lint = require 'lint'
+          vim.g.lint_enabled = not vim.g.lint_enabled
+          if vim.g.lint_enabled then
+            lint.try_lint()
+          else
+            vim.diagnostic.reset()
+          end
+        end,
+        desc = '[T]oggle [L]inting',
+      },
+    },
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
@@ -20,15 +35,6 @@ return {
           end
         end,
       })
-
-      vim.keymap.set('n', '<leader>tl', function()
-        vim.g.lint_enabled = not vim.g.lint_enabled
-        if vim.g.lint_enabled then
-          lint.try_lint()
-        else
-          vim.diagnostic.reset()
-        end
-      end, { desc = '[T]oggle [L]inting' })
     end,
   },
 }
