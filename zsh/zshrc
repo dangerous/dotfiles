@@ -1,0 +1,104 @@
+# Prompt
+autoload -U colors && colors
+setopt prompt_subst
+source ~/git/dotfiles/zsh/dangerous.zsh-theme
+
+# History
+HISTSIZE=50000
+SAVEHIST=50000
+HISTFILE=~/.zsh_history
+setopt extended_history hist_expire_dups_first hist_ignore_dups hist_ignore_space share_history
+setopt rmstarsilent nohistverify
+bindkey '^[[A' history-beginning-search-backward  # ↑
+bindkey '^[[B' history-beginning-search-forward  # ↓
+
+# Completion
+autoload -U +X compinit && compinit -C
+zstyle ':completion:*' matcher-list ''
+
+# Disable paste highlighting
+zle_highlight+=(paste:none)
+
+# Help
+unalias run-help 2>/dev/null
+autoload run-help
+HELPDIR=/opt/homebrew/share/zsh/help
+
+# Editor
+export EDITOR=nvim
+
+# PATH
+export PATH=~/bin:~/.local/bin:~/.cargo/bin:$PATH
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# asdf
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+export ASDF_DATA_DIR="$HOME/.asdf"
+export PATH="$ASDF_DATA_DIR/shims:$PATH"
+export PATH="$HOME/.asdf/installs/nodejs/22.17.1/bin:$PATH"
+
+# Tools
+eval "$(direnv hook zsh)"
+# Alias reminders
+source /opt/homebrew/share/zsh-you-should-use/you-should-use.plugin.zsh
+export YSU_HARDCORE=1
+
+# Named directories for ~/git/*
+for dir in ~/git/*/; do
+  [[ ${dir:t} == *' '* ]] && continue
+  hash -d ${dir:t}=$dir
+done
+
+# Git aliases
+alias ga='git add'
+alias gap='git add -p'
+alias gc='git commit'
+alias gco='git checkout'
+alias gd='git diff'
+alias gl='git log --date-order --graph --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset"'
+alias glh='gl --color=always | head'
+alias gp='git push'
+alias gpf='git push --force-with-lease'
+alias gpl='git pull'
+alias grb='git rebase'
+alias grbm='git rebase origin/main'
+alias s='git status'
+alias gcm='git checkout main'
+alias gcs='git checkout staging'
+alias gsh='git show'
+alias gb='git branch'
+alias gcp='git cherry-pick'
+alias gf='git fetch'
+
+# Typo corrections
+alias got='git'
+alias gti='git'
+
+# General aliases
+alias vim=nvim
+alias x='exit'
+alias ss='sudo su -'
+alias assume=". assume"
+alias terminal-notifier='reattach-to-user-namespace terminal-notifier'
+alias be='bundle exec'
+alias rc='rubocop -A'
+alias ag='rg --hidden'
+alias awswhoami="env | grep VAULT; aws sts get-caller-identity | account-name-expand.sh "
+alias updatedb='sudo /usr/libexec/locate.updatedb'
+alias flushdns='sudo killall -HUP mDNSResponder'
+alias rnl="tr '\n' ' ' | sed 's/$//'"
+_calc() { echo "$@" | bc -l -q -i }
+alias calc='noglob _calc'
+alias telnet='nc -v'
+
+# Functions
+aws-login() {
+    firefox "$(printf 'ext+container:name=work&url=%s' $(aws-vault login --stdout $1 | jq -sRr @uri))"
+}
+
+serve() {
+  ruby -run -e httpd . -p 9090
+}
+
+export SPEC_AUTHOR="David Rainsford"
