@@ -28,7 +28,13 @@ ln -sfn "$DOTFILES_DIR/zsh/zshenv" "$HOME/.zshenv"
 echo "==> Symlinking nvim config..."
 ln -sfn "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 
-# 5. Clone dotfiles-private
+# 5. Symlink ghostty config
+echo "==> Symlinking ghostty config..."
+GHOSTTY_DIR="$HOME/Library/Application Support/com.mitchellh.ghostty"
+mkdir -p "$GHOSTTY_DIR"
+ln -sfn "$DOTFILES_DIR/ghostty/config" "$GHOSTTY_DIR/config"
+
+# 6. Clone dotfiles-private
 if [ ! -d "$PRIVATE_REPO" ]; then
   echo "==> Cloning dotfiles-private..."
   git clone git@github.com:dangerous/dotfiles-private.git "$PRIVATE_REPO"
@@ -36,12 +42,12 @@ else
   echo "==> dotfiles-private already cloned"
 fi
 
-# 6. Symlink CLAUDE.md
+# 7. Symlink CLAUDE.md
 echo "==> Symlinking CLAUDE.md..."
 mkdir -p "$HOME/.claude"
 ln -sfn "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
-# 7. Install Claude Code
+# 8. Install Claude Code
 if ! command -v claude &>/dev/null; then
   echo "==> Installing Claude Code..."
   curl -fsSL https://claude.ai/install.sh | sh
