@@ -2,14 +2,13 @@ return { -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
   lazy = false,
   branch = 'main',
-  build = ':TSUpdate',
+  build = function()
+    require('nvim-treesitter').install { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
+  end,
   -- [[ Configure Treesitter ]] See `:help nvim-treesitter-intro`
   config = function()
     local ts_path = vim.fn.stdpath 'data' .. '/lazy/nvim-treesitter'
     vim.opt.rtp:prepend(ts_path .. '/runtime')
-
-    local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
-    require('nvim-treesitter').install(parsers)
 
     vim.api.nvim_create_autocmd('FileType', {
       callback = function(args)
