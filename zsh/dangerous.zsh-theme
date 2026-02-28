@@ -49,4 +49,5 @@ tilde_or_pwd() {
 export PROMPT='%{$fg[magenta]%}%n@%M %{$fg[green]%}$(tilde_or_pwd)%{$reset_color%}$(git_cwd_info)
 $ARROW%{$reset_color%} '
 export RPROMPT=''
+export CLICOLOR=1
 export LSCOLORS="exfxcxdxbxegedabagacad"
