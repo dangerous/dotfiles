@@ -1,3 +1,4 @@
 theme = Dracula
 
 keybind = super+shift+equal=equalize_splits
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
