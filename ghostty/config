@@ -1,4 +1,5 @@
 theme = Dracula
+window-inherit-working-directory = false
 
 keybind = super+shift+equal=equalize_splits
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
