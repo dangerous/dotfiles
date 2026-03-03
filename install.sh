@@ -30,9 +30,8 @@ ln -sfn "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 
 # 5. Symlink ghostty config
 echo "==> Symlinking ghostty config..."
-GHOSTTY_DIR="$HOME/Library/Application Support/com.mitchellh.ghostty"
-mkdir -p "$GHOSTTY_DIR"
-ln -sfn "$DOTFILES_DIR/ghostty/config" "$GHOSTTY_DIR/config"
+mkdir -p "$HOME/.config/ghostty"
+ln -sfn "$DOTFILES_DIR/ghostty/config" "$HOME/.config/ghostty/config"
 
 # 6. Clone dotfiles-private
 if [ ! -d "$PRIVATE_REPO" ]; then
