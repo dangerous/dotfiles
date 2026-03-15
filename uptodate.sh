@@ -3,6 +3,11 @@ set -e
 
 DOTFILES_DIR="$HOME/git/dotfiles"
 PRIVATE_REPO="$HOME/git/dotfiles-private"
+UPGRADE=false
+
+if [[ "$1" == "--upgrade" || "$1" == "-u" ]]; then
+  UPGRADE=true
+fi
 
 echo "==> Installing dotfiles..."
 
@@ -16,8 +21,15 @@ else
 fi
 
 # 2. Install brew packages
-echo "==> Running brew bundle..."
-brew bundle --file="$DOTFILES_DIR/Brewfile"
+if $UPGRADE; then
+  echo "==> Updating Homebrew and upgrading packages..."
+  brew update
+  brew upgrade
+  brew bundle --file="$DOTFILES_DIR/Brewfile"
+else
+  echo "==> Running brew bundle..."
+  brew bundle --file="$DOTFILES_DIR/Brewfile"
+fi
 
 # 3. Symlink zsh config
 echo "==> Symlinking zsh config..."
@@ -34,10 +46,23 @@ echo "==> Symlinking tool-versions..."
 ln -sfn "$DOTFILES_DIR/tool-versions" "$HOME/.tool-versions"
 
 # 6. Install asdf tool versions
-echo "==> Installing asdf tool versions..."
 asdf plugin add ruby 2>/dev/null || true
 asdf plugin add nodejs 2>/dev/null || true
-asdf install
+if $UPGRADE; then
+  echo "==> Upgrading asdf tool versions to latest..."
+  for tool in $(awk '{print $1}' "$DOTFILES_DIR/tool-versions"); do
+    latest=$(asdf latest "$tool")
+    echo "    $tool -> $latest"
+    asdf install "$tool" "$latest"
+    asdf set --home "$tool" "$latest"
+  done
+  # Update tool-versions file and hardcoded nodejs path in zshrc
+  nodejs_version=$(asdf latest nodejs)
+  sed -i '' "s|/.asdf/installs/nodejs/.*/bin|/.asdf/installs/nodejs/$nodejs_version/bin|" "$DOTFILES_DIR/zsh/zshrc"
+else
+  echo "==> Installing asdf tool versions..."
+  asdf install
+fi
 
 # 7. Symlink nvim config
 echo "==> Symlinking nvim config..."
@@ -74,5 +99,16 @@ fi
 # 12. Configure Claude MCP servers
 echo "==> Configuring Claude MCP servers..."
 claude mcp add codex -s user -- codex mcp-server -m gpt-5.4-codex -c model_reasoning_effort=high
+
+if $UPGRADE; then
+  echo "==> Committing upgrades..."
+  git -C "$DOTFILES_DIR" add -A
+  if ! git -C "$DOTFILES_DIR" diff --cached --quiet; then
+    git -C "$DOTFILES_DIR" commit -m "Upgrade tool versions and brew packages"
+    git -C "$DOTFILES_DIR" push
+  else
+    echo "    No changes to commit"
+  fi
+fi
 
 echo "==> Done!"
