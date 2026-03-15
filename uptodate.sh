@@ -42,10 +42,11 @@ else
   echo "==> dotfiles-private already cloned"
 fi
 
-# 7. Symlink CLAUDE.md
-echo "==> Symlinking CLAUDE.md..."
+# 7. Symlink Claude config
+echo "==> Symlinking Claude config..."
 mkdir -p "$HOME/.claude"
 ln -sfn "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+ln -sfn "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
 
 # 8. Install Claude Code
 if ! command -v claude &>/dev/null; then
@@ -54,5 +55,9 @@ if ! command -v claude &>/dev/null; then
 else
   echo "==> Claude Code already installed"
 fi
+
+# 9. Configure Claude MCP servers
+echo "==> Configuring Claude MCP servers..."
+claude mcp add codex -s user -- codex mcp-server -m gpt-5.4-codex -c model_reasoning_effort=high
 
 echo "==> Done!"
