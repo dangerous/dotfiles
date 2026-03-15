@@ -36,7 +36,7 @@ export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 export ASDF_DATA_DIR="$HOME/.asdf"
 export PATH="$ASDF_DATA_DIR/shims:$PATH"
-export PATH="$HOME/.asdf/installs/nodejs/22.17.1/bin:$PATH"
+export PATH="$HOME/.asdf/installs/nodejs/25.7.0/bin:$PATH"
 
 # Tools
 eval "$(direnv hook zsh)"
