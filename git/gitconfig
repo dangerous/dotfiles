@@ -1,0 +1,19 @@
+[user]
+	name = David Rainsford
+	email = david@rainsford.org
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[rebase]
+	autoStash = true
+[rerere]
+	enabled = true
+[merge]
+	conflictstyle = zdiff3
+[diff]
+	algorithm = histogram
