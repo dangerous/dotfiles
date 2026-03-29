@@ -3,6 +3,12 @@
 	email = david@rainsford.org
 [init]
 	defaultBranch = main
+[color]
+	ui = true
+	branch = auto
+	status = auto
+[core]
+	excludesfile = ~/.gitignore
 [push]
 	autoSetupRemote = true
 [pull]
@@ -10,6 +16,7 @@
 [fetch]
 	prune = true
 [rebase]
+	autoSquash = true
 	autoStash = true
 [rerere]
 	enabled = true
@@ -17,3 +24,22 @@
 	conflictstyle = zdiff3
 [diff]
 	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[credential "https://github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[help]
+	autocorrect = prompt
+[include]
+	path = ~/git/dotfiles-private/git/gitconfig.local

@@ -47,6 +47,7 @@ ln -sfn "$DOTFILES_DIR/zsh/zprofile" "$HOME/.zprofile"
 # 5. Symlink git config
 echo "==> Symlinking git config..."
 ln -sfn "$DOTFILES_DIR/git/gitconfig" "$HOME/.gitconfig"
+ln -sfn "$DOTFILES_DIR/git/gitignore" "$HOME/.gitignore"
 
 # 6. Symlink tool-versions
 echo "==> Symlinking tool-versions..."
@@ -55,6 +56,7 @@ ln -sfn "$DOTFILES_DIR/tool-versions" "$HOME/.tool-versions"
 # 7. Install asdf tool versions
 asdf plugin add ruby 2>/dev/null || true
 asdf plugin add nodejs 2>/dev/null || true
+asdf plugin add python 2>/dev/null || true
 if $UPGRADE; then
   echo "==> Upgrading asdf tool versions to latest..."
   for tool in $(awk '{print $1}' "$DOTFILES_DIR/tool-versions"); do
@@ -94,6 +96,9 @@ echo "==> Symlinking Claude config..."
 mkdir -p "$HOME/.claude"
 ln -sfn "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 ln -sfn "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
+if [ -f "$PRIVATE_REPO/claude/settings.local.json" ]; then
+  ln -sfn "$PRIVATE_REPO/claude/settings.local.json" "$HOME/.claude/settings.local.json"
+fi
 
 # 12. Install Claude Code
 if ! command -v claude &>/dev/null; then

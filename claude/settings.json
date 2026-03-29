@@ -1,11 +1,57 @@
 {
-  "enabledPlugins": {
-    "frontend-design@claude-plugins-official": true,
-    "skill-creator@claude-plugins-official": true
-  },
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(bundle *)",
+      "Bash(bin/*)",
+      "Bash(rails *)",
+      "Bash(ruby *)",
+      "Bash(python3 *)",
+      "Bash(gh *)",
+      "Bash(docker-compose *)",
+      "Bash(docker compose *)",
+      "Bash(aws-vault *)",
+      "Bash(aws *)",
+      "Bash(npx *)",
+      "Bash(yarn *)",
+      "Bash(node *)",
+      "Bash(curl *)",
+      "Bash(chmod *)",
+      "Bash(mkdir *)",
+      "Bash(rm *)",
+      "Bash(mv *)",
+      "Bash(cp *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(grep *)",
+      "Bash(find *)",
+      "Bash(sed *)",
+      "Bash(lsof *)",
+      "Bash(echo *)",
+      "Bash(cd *)",
+      "Bash(script/*)",
+      "Bash(say *)",
+      "Bash(ffmpeg *)",
+      "Bash(ffprobe *)",
+      "Bash(identify *)",
+      "Bash(open *)",
+      "Bash(adr *)",
+      "Bash(ejsonkms *)",
+      "Bash(overcommit *)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:docs.envato.net)",
+      "WebFetch(domain:envato.atlassian.net)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)"
+    ]
+  },
+  "model": "opus[1m]",
   "hooks": {
     "Notification": [
       {
@@ -85,14 +131,21 @@
       }
     ]
   },
-  "model": "opus[1m]",
-  "permissions": {
-    "allow": [
-      "WebFetch",
-      "WebSearch",
-      "Bash(npx *)"
-    ]
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true,
+    "agent-deck@agent-deck": true,
+    "skill-creator@claude-plugins-official": true,
+    "ruby-lsp@claude-plugins-official": true
   },
+  "extraKnownMarketplaces": {
+    "agent-toolkit": {
+      "source": {
+        "source": "github",
+        "repo": "envato/agent-toolkit"
+      }
+    }
+  },
+  "effortLevel": "medium",
   "skipDangerousModePermissionPrompt": true,
   "statusLine": {
     "type": "command",

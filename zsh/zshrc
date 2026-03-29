@@ -9,8 +9,11 @@ SAVEHIST=50000
 HISTFILE=~/.zsh_history
 setopt extended_history hist_expire_dups_first hist_ignore_dups hist_ignore_space share_history
 setopt rmstarsilent nohistverify
-bindkey '^[[A' history-beginning-search-backward  # ↑
-bindkey '^[[B' history-beginning-search-forward  # ↓
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey '^[[A' history-beginning-search-backward-end  # ↑
+bindkey '^[[B' history-beginning-search-forward-end  # ↓
 
 # Completion
 autoload -U +X compinit && compinit -C
@@ -59,7 +62,9 @@ alias gl='git log --date-order --graph --pretty="format:%C(yellow)%h%Cblue%d%Cre
 alias glh='gl --color=always | head'
 alias gp='git push'
 alias gpf='git push --force-with-lease'
+alias gpu='git push --set-upstream'
 alias gpl='git pull'
+alias gm='git merge'
 alias grb='git rebase'
 alias grbm='git rebase origin/main'
 alias s='git status'
@@ -76,6 +81,7 @@ alias gti='git'
 
 # General aliases
 alias vim=nvim
+alias ls='ls -G'
 alias x='exit'
 alias ss='sudo su -'
 alias assume=". assume"
